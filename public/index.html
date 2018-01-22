@@ -6,12 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>DMEdit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://esironal.github.io/cmtouch/lib/codemirror.css">
+    <link rel="stylesheet" href="http://esironal.github.io/cmtouch/addon/hint/show-hint.css">
+    <script src="http://esironal.github.io/cmtouch/lib/codemirror.js"></script>
+    <script src="http://esironal.github.io/cmtouch/addon/hint/show-hint.js"></script>
+    <script src="http://esironal.github.io/cmtouch/addon/hint/xml-hint.js"></script>
+    <script src="http://esironal.github.io/cmtouch/addon/hint/html-hint.js"></script>
+    <script src="http://esironal.github.io/cmtouch/mode/xml/xml.js"></script>
+    <script src="http://esironal.github.io/cmtouch/mode/javascript/javascript.js"></script>
+    <script src="http://esironal.github.io/cmtouch/mode/css/css.js"></script>
+    <script src="http://esironal.github.io/cmtouch/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="http://esironal.github.io/cmtouch/addon/selection/active-line.js"></script>
+    <script src="http://esironal.github.io/cmtouch/addon/edit/matchbrackets.js"></script>
+
+    <link rel="stylesheet" href="http://esironal.github.io/cmtouch/theme/neonsyntax.css">
+
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
 </head>
 
 <body>
+    <div id="code"></div>
 
+
+    <script type="text/javascript">
+        CodeMirror.commands.autocomplete = function(cm) {
+            CodeMirror.showHint(cm, CodeMirror.hint.html);
+        }
+        window.onload = function() {
+            editor = CodeMirror(document.getElementById("code"), {
+                mode: "text/html",
+                theme: "neonsyntax",
+                lineWrapping: true,
+                lineNumbers: true,
+                styleActiveLine: true,
+                matchBrackets: true,
+                extraKeys: {
+                    "Ctrl-Space": "autocomplete"
+                },
+                value: "<!doctype html>\n<html>\n  " + document.documentElement.innerHTML + "\n</html>"
+            });
+        };
+    </script>
 </body>
 
 </html>
